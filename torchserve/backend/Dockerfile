@@ -31,5 +31,7 @@ RUN wget https://github.com/facebookresearch/AnimatedDrawings/releases/download/
 RUN wget https://github.com/facebookresearch/AnimatedDrawings/releases/download/v0.0.1/drawn_humanoid_pose_estimator.mar -P /home/torchserve/model-store/
 COPY config.properties /home/torchserve/config.properties
 
+EXPOSE 8080
+EXPOSE 8081
 # starting command
 CMD /opt/conda/bin/torchserve --start --ts-config /home/torchserve/config.properties && sleep infinity
