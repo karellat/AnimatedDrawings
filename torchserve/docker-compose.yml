@@ -25,9 +25,6 @@ services:
     build: frontend
     ports:
       - 3000:3000
-    environment:
-      # TODO: Set up proxy correctly
-      - REACT_APP_BACKEND_URL=http://proxy:80
     networks:
         default:
           aliases:
