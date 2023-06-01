@@ -3,6 +3,7 @@ import Webcam from 'react-webcam';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { FilePicker } from "react-file-picker";
 
 import './camera.css'; // Import the CSS file
 
@@ -20,12 +21,15 @@ const Camera = () => {
 
   const sendPhotoToBackend = async (photoData) => {
     try {
+      const response = await axios.post('/predictions/drawn_humanoid_detector',
+                       {data: photoData.split(',')[1]}, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
       setUploading(true);
       console.log('Uploading');
-      // Make an HTTP POST request to your backend endpoint
-      // Package Axios is ignoring docker network DNS
-      // TODO: Fix CORS
-      const response = await axios.post('/predictions/drawn_humanoid_detector', { data: photoData });
       console.log(response);
       console.log('Photo uploaded successfully!');
       setUploading(false);
@@ -66,16 +70,20 @@ const Camera = () => {
         >
           Restart
         </Button>
-      ) : (
+      ) : (<div>
+
         <Button
           className="capture-button"
           variant="contained"
           color="primary"
           size="large"
-          onClick={capturePhoto}
         >
           Capture Photo
         </Button>
+        <Button>
+          Add file
+        </Button>
+      </div>
       )}
     </div>
   );

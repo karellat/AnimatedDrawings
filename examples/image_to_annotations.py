@@ -48,6 +48,7 @@ def image_to_annotations(img_fn: str, out_dir: str) -> None:
     # convert to bytes and send to torchserve
     img_b = cv2.imencode('.png', img)[1].tobytes()
     request_data = {'data': img_b}
+    print(request_data)
     resp = requests.post("http://localhost:8080/predictions/drawn_humanoid_detector", files=request_data, verify=False)
     if resp is None or resp.status_code >= 300:
         raise Exception(f"Failed to get bounding box, please check if the 'docker_torchserve' is running and healthy, resp: {resp}")
