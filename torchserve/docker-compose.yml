@@ -29,3 +29,11 @@ services:
         default:
           aliases:
             - frontend
+  render: 
+    build: render
+    ports:
+      - 8000:8000
+    networks:
+        default:
+          aliases:
+            - render

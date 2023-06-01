@@ -80,7 +80,7 @@ class Controller():
         while not self._is_run_over():
             self._start_run_loop_iteration()
             self._update()
-            self._render()
+            #self._render()
             self._tick()
             self._handle_user_input()
             self._finish_run_loop_iteration()

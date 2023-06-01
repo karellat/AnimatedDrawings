@@ -5,7 +5,7 @@ run_local:
 build: 
 	sudo docker build -t animatedapi .
 run: build
-	sudo docker run --gpus=all --rm -p 80:80 --name animated animatedapi 
+	sudo docker run -it --gpus=all --rm -p 8000:8000 --name animated animatedapi 
 term: 
 	sudo docker container exec -it animated /bin/sh
 
